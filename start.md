@@ -40,4 +40,15 @@
      
 ]]]]]]
 
+git init
+git add .
+git commit -m "first commit"
+git branch -M main
+git push -u origin main
+git push -u origin master
+
+
+<!-- git remote add origin https://github.com/Abdulrahman-Abdulrahman/NodeJS.git
+git push -u origin main -->
+
 

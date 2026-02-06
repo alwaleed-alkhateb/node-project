@@ -35,13 +35,21 @@ const upload = multer({
     , fileFilter: fileFilter
 });
 
+
 router.route('/')
-    .get(verifyToken, controllers.getAllUsers)
-    .post(
+    .get(verifyToken, controllers.getAllUsers);
+// .post(
+//     body('firstName').notEmpty().isLength({ min: 2 }).withMessage('First name must be at least 2 characters long'),
+//     body('lastName').notEmpty().isLength({ min: 2 }).withMessage('Last name must be at least 2 characters long'),
+//     controllers.createUsers, upload.single('avatar')
+// )
+
+router.route('/register')
+    .post(upload.single('avatar'),
         body('firstName').notEmpty().isLength({ min: 2 }).withMessage('First name must be at least 2 characters long'),
         body('lastName').notEmpty().isLength({ min: 2 }).withMessage('Last name must be at least 2 characters long'),
-        controllers.createUsers, upload.single('avatar')
-    )
+        controllers.createUsers
+    );
 
 router.route('/login')
     .post(controllers.loginUser);

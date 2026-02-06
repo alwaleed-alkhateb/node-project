@@ -9,13 +9,11 @@ const path = require('path');
 app.use(express.json());
 
 
-mongoose.connect(process.env.MONGODB_URI).then(() => {
-    console.log('Connected to MongoDB');
-});
 
 app.use(cors());
 app.use('/api/courses', courseRoutes);
 app.use('/api/users', usersRoutes);
+app.use(express.static(path.join(__dirname, '/')));
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
 
 
@@ -32,7 +30,10 @@ app.use((err, req, res, next) => {
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'reg.html'));
 });
-app.use(express.static(path.join(__dirname, '/')));
+
+mongoose.connect(process.env.MONGODB_URI).then(() => {
+    console.log('Connected to MongoDB');
+});
 
 app.listen(process.env.PORT, () => {
     console.log('Server is running on port 3000');

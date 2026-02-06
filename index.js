@@ -20,6 +20,7 @@ app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
 
 
 
+
 // app.all('*', (req, res) => {
 //     res.status(404).json({ status: httpStatus.ERROR, message: 'Route not found' });
 // });
@@ -27,6 +28,11 @@ app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
 app.use((err, req, res, next) => {
     res.status(500).json({ status: err.statusText, message: err.message });
 });
+
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'reg.html'));
+});
+app.use(express.static(path.join(__dirname, '/')));
 
 app.listen(process.env.PORT, () => {
     console.log('Server is running on port 3000');
